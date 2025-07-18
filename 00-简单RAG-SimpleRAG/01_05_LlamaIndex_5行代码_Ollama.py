@@ -33,12 +33,13 @@ embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
 
 # 创建 Ollama LLM, 默认URL：http://localhost:11434
 llm = Ollama(
-    model=os.getenv("OLLAMA_MODEL"),
+    # model=os.getenv("OLLAMA_MODEL"),
+    model="qwen3:0.6b",
     request_timeout=300.0
 )
 
 # 第二行代码：加载数据
-documents = SimpleDirectoryReader(input_files=["90-文档-Data/黑悟空/设定.txt"]).load_data() 
+documents = SimpleDirectoryReader(input_files=["../90-文档-Data/黑悟空/设定.txt"]).load_data()
 
 # 第三行代码：构建索引
 index = VectorStoreIndex.from_documents(
@@ -52,4 +53,4 @@ query_engine = index.as_query_engine(
 )
 
 # 第五行代码: 开始问答
-print(query_engine.query("黑神话悟空中有哪些战斗工具?"))
+print(query_engine.query("黑神话悟空中有哪些地标?"))
