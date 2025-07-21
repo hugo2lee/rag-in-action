@@ -24,12 +24,13 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama # 需要pip install llama-index-llms-ollama
 from dotenv import load_dotenv
 import os
+import time
 
 # 加载环境变量
 load_dotenv()
 
 # 加载本地嵌入模型
-embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh")
+embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh-v1.5")
 
 # 创建 Ollama LLM, 默认URL：http://localhost:11434
 llm = Ollama(
@@ -39,7 +40,7 @@ llm = Ollama(
 )
 
 # 第二行代码：加载数据
-documents = SimpleDirectoryReader(input_files=["../90-文档-Data/黑悟空/设定.txt"]).load_data()
+documents = SimpleDirectoryReader(input_files=["../90-文档-Data/黑悟空/黑悟空wiki.txt"]).load_data()
 
 # 第三行代码：构建索引
 index = VectorStoreIndex.from_documents(
@@ -53,4 +54,9 @@ query_engine = index.as_query_engine(
 )
 
 # 第五行代码: 开始问答
-print(query_engine.query("黑神话悟空中有哪些地标?"))
+while True:
+    query = input("\n\n请输入您的问题: ")
+    start_time = time.time()
+    response = query_engine.query(query)
+    end_time = time.time()
+    print(f"用时：{end_time - start_time:.2f} 秒，回答：{response}")

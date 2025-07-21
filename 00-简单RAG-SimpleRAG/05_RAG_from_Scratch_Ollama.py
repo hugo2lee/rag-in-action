@@ -19,7 +19,8 @@ docs = [
 
 # 2. 设置嵌入模型
 from sentence_transformers import SentenceTransformer
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+# model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+model = SentenceTransformer('BAAI/bge-small-zh-v1.5')
 doc_embeddings = model.encode(docs)
 print(f"文档向量维度: {doc_embeddings.shape}")
 
@@ -32,7 +33,7 @@ index.add(doc_embeddings.astype('float32'))
 print(f"向量数据库中的文档数量: {index.ntotal}")
 
 # 4. 执行相似度检索
-question = "黑神话悟空的战斗系统有什么特点?"
+question = "武器"
 query_embedding = model.encode([question])[0]
 distances, indices = index.search(
     np.array([query_embedding]).astype('float32'), 
@@ -42,6 +43,8 @@ context = [docs[idx] for idx in indices[0]]
 print("\n检索到的相关文档:")
 for i, doc in enumerate(context, 1):
     print(f"[{i}] {doc}")
+
+
 
 # 5. 构建提示词
 prompt = f"""根据以下参考信息回答问题，并给出信息源编号。
@@ -55,7 +58,8 @@ prompt = f"""根据以下参考信息回答问题，并给出信息源编号。
 from ollama import chat
 
 response = chat(
-    model=os.getenv("OLLAMA_MODEL"),  
+    # model=os.getenv("OLLAMA_MODEL"),
+    model="qwen3:0.6b",
     messages=[{
         "role": "user",
         "content": prompt

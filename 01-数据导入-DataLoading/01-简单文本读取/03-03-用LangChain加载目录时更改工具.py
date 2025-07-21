@@ -10,7 +10,7 @@ data_dir = os.path.join(script_dir, '../../90-文档-Data/黑悟空')
 # 加载目录下所有 Markdown 文件
 loader = DirectoryLoader(data_dir,
                          glob="**/*.md",
-                         loader_cls=TextLoader # 指定加载工具
+                         loader_cls=lambda path: TextLoader(path, encoding="utf-8") # 指定加载工具
                          )
 docs = loader.load()
 print(docs[0].page_content[:100])  # 打印第一个文档内容的前100个字符

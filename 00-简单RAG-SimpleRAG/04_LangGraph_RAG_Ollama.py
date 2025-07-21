@@ -49,7 +49,8 @@ def retrieve(state: State):
 # 8. 定义生成步骤
 def generate(state: State):
     from langchain_ollama import ChatOllama
-    llm = ChatOllama(model=os.getenv("OLLAMA_MODEL"))
+    # llm = ChatOllama(model=os.getenv("OLLAMA_MODEL"))
+    llm = ChatOllama(model="qwen3:0.6b")
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
     messages = prompt.invoke({"question": state["question"], "context": docs_content})
     response = llm.invoke(messages)

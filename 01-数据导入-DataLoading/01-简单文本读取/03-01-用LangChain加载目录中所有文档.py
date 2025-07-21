@@ -51,3 +51,10 @@ loader = DirectoryLoader(data_dir)
 docs = loader.load()
 print(f"文档数：{len(docs)}")  # 输出文档总数
 print(docs[0])  # 输出第一个文档
+
+# from langchain_community.document_loaders import UnstructuredPDFLoader
+#
+# pdf_path = data_dir+ '/黑神话悟空.pdf'
+# loader = UnstructuredPDFLoader(pdf_path, ocr_mode=True, language='chi_sim')
+# docs = loader.load()
+# print(docs[0].page_content)
