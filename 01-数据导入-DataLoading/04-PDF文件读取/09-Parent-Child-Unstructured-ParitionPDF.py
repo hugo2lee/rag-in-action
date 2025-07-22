@@ -1,7 +1,7 @@
 from unstructured.documents.elements import Title, NarrativeText, Text
 from unstructured.partition.pdf import partition_pdf
 
-file_path = '90-文档-Data/山西文旅/云冈石窟-en.pdf'
+file_path = '../../90-文档-Data/山西文旅/云冈石窟-en.pdf'
 
 # 使用 unstructured 直接读取 PDF
 elements = partition_pdf(

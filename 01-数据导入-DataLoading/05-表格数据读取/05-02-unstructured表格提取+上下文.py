@@ -2,17 +2,19 @@ from unstructured.partition.pdf import partition_pdf
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.llms.ollama import Ollama
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 # 全局设置
-Settings.llm = OpenAI(model="gpt-3.5-turbo")
-Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+Settings.llm = Ollama(model="qwen3:0.6b")
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh-v1.5")
 
 # 解析 PDF 结构，提取文本和表格
-file_path = "90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"  # 修改为你的文件路径
+file_path = "../../90-文档-Data/复杂PDF/billionaires_page-1-5.pdf"  # 修改为你的文件路径
 
 elements = partition_pdf(
     file_path,
-    # strategy="hi_res",  # 使用高精度策略
+    strategy="hi_res",  # 使用高精度策略
 )  # 解析PDF文档
 
 # 创建一个元素ID到元素的映射

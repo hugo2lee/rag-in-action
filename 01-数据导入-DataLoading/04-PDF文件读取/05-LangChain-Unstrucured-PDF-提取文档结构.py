@@ -1,4 +1,4 @@
-file_path = ("90-文档-Data/山西文旅/云冈石窟-en.pdf")
+file_path = ("../../90-文档-Data/山西文旅/云冈石窟-en.pdf")
 from langchain_unstructured import UnstructuredLoader
 loader = UnstructuredLoader(
     file_path=file_path,

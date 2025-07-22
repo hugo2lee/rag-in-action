@@ -3,15 +3,14 @@ import base64
 import os
 from openai import OpenAI
 
-# 初始化 OpenAI 客户端
-client = OpenAI()
+
 output_dir = "temp_images"
 
 # 1. PDF 转图片
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-images = convert_from_path("90-文档-Data/黑悟空/黑神话悟空.pdf")
+images = convert_from_path("../../90-文档-Data/黑悟空/黑神话悟空.pdf")
 image_paths = []
 for i, image in enumerate(images):
     image_path = os.path.join(output_dir, f'page_{i+1}.jpg')
@@ -19,7 +18,8 @@ for i, image in enumerate(images):
     image_paths.append(image_path)
 print(f"成功转换 {len(image_paths)} 页")
 
-
+# 初始化 OpenAI 客户端
+client = OpenAI()
 # 2. GPT-4o 分析图片
 print("\n开始分析图片...")
 results = []

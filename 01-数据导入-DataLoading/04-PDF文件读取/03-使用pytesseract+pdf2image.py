@@ -11,7 +11,7 @@ output_dir = 'output'
 os.makedirs(output_dir, exist_ok=True)
 
 # 将 PDF 转换为图片并保存
-images = pdf2image.convert_from_path('90-文档-Data/黑悟空/黑神话悟空.pdf')
+images = pdf2image.convert_from_path('../../90-文档-Data/黑悟空/黑神话悟空.pdf')
 for i, image in enumerate(images):
     image.save(f'{output_dir}/page_{i+1}.png')
 

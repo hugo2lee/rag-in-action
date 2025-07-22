@@ -6,7 +6,7 @@ import time
 start_time = time.time()
 
 # 打开PDF文件
-pdf = pdfplumber.open("90-文档-Data/复杂PDF/billionaires_page-1-5.pdf")
+pdf = pdfplumber.open("../../90-文档-Data/复杂PDF/billionaires_page-1-5.pdf")
 
 # 遍历每一页
 for page in pdf.pages:
