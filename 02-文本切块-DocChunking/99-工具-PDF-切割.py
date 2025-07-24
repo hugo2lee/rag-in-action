@@ -33,8 +33,8 @@ def extract_pages(pdf_path, output_path, page_numbers):
         raise
             
 if __name__ == "__main__":
-    pdf_path = "90-文档-Data/复杂PDF/uber_10q_march_2022.pdf"
-    output_path = "90-文档-Data/复杂PDF/uber_10q_march_2022_page1-3.pdf"
-    page_numbers = [26, 27, 28]  # 指定要提取的页码
+    pdf_path = "../90-文档-Data/复杂PDF/uber_10q_march_2022.pdf"
+    output_path = "../90-文档-Data/复杂PDF/uber_10q_march_2022_page1-3.pdf"
+    page_numbers = [28]  # 指定要提取的页码
     extract_pages(pdf_path, output_path, page_numbers)
         

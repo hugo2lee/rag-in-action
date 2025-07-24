@@ -1,5 +1,5 @@
-from llama_index.llms.openai import OpenAI
-from llama_index.embeddings.openai import OpenAIEmbedding
+# from llama_index.llms.openai import OpenAI
+# from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import VectorStoreIndex
 from llama_index.core import Settings
 from llama_index.readers.file import PDFReader
@@ -9,18 +9,19 @@ from dotenv import load_dotenv
 load_dotenv()   
 
 import os
+from llama_index.llms.ollama import Ollama
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+# embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+# llm = OpenAI(model="gpt-3.5-turbo-0125")
 
-embed_model = OpenAIEmbedding(model="text-embedding-3-small")
-llm = OpenAI(model="gpt-3.5-turbo-0125")
-
-Settings.embed_model = embed_model
-Settings.llm = llm
-Settings.node_parser = SentenceSplitter(chunk_size=250, chunk_overlap=20) # 50, 100, 250将得到不同的结果，为什么？
+Settings.llm = Ollama(model="qwen3:0.6b")
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+Settings.node_parser = SentenceSplitter(chunk_size=50, chunk_overlap=20) # 50, 100, 250将得到不同的结果，为什么？
 
 # Load PDF using standard PDFReader
 loader = PDFReader()
 documents = loader.load_data(
-    file="90-文档-Data/复杂PDF/uber_10q_march_2022_page26.pdf"
+    file="../90-文档-Data/复杂PDF/uber_10q_march_2022_page26.pdf"
 )
 
 # Create index directly from documents
