@@ -33,3 +33,15 @@ def bm25_sparse_embedding(log):
 for log in battle_logs:
     sparse_embedding = bm25_sparse_embedding(log)
 print(f"稀疏嵌入： {sparse_embedding}")
+
+# 打印词语与索引映射关系
+print("词语与索引映射关系：")
+for word, idx in vocab_to_idx.items():
+    print(f"{idx}: {word}")
+
+for i, log in enumerate(battle_logs):
+    sparse_embedding = bm25_sparse_embedding(log)
+    print(f"\n第{i+1}条日志的词语与词权重：")
+    for idx, weight in sparse_embedding.items():
+        word = [w for w, i in vocab_to_idx.items() if i == idx][0]
+        print(f"{word}: {weight:.6f}")
